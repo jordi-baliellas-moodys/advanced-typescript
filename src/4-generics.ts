@@ -2,7 +2,7 @@ const failPick = (obj: object, key: string) => obj[key];
 
 const failResult = failPick({ aaa: 0 }, "ddd")();
 
-const pick = <T extends object, K extends keyof T>(obj: T, key: K) => obj[key];
+const pick = <T extends object>(obj: T, key: keyof T) => obj[key];
 
 const result = pick({ aaa: 0 }, "aaa");
 
@@ -66,3 +66,20 @@ type ReturnMapToObject<T extends InputMapToObject> = T extends Map<
   : never;
 
 type ParsedHouse = ReturnMapToObject<House>;
+
+const companyTotals = [
+  { name: "apple", total: 5, date: new Date() },
+  { name: "nvidia", total: 2, date: new Date() },
+];
+
+export const pickAndSum = <
+  T extends object,
+  TKey extends keyof {
+    [K in keyof T as T[K] extends number ? K : never]: T[K];
+  }
+>(
+  arr: T[],
+  key: TKey
+) => arr.reduce((a, b) => a + (b[key] as number), 0);
+
+pickAndSum(companyTotals, "total");
