@@ -79,9 +79,23 @@ type Example1 = UsernameI extends Person ? number : string;
 
 type Example2 = RegExp extends Person ? number : string;
 
+// in keyof iterator
+type Width = {
+  xs: number | string;
+  sm: number | string;
+  md: number | string;
+  lg: number | string;
+  xl: number | string;
+};
+
+type WidthNumber = {
+  [K in keyof Width]: number;
+};
+
 // type Example2 = string;
 
 type CacheKey<Str extends string> = `cacheId-${Lowercase<Str>}`;
-type MainID = CacheKey<"MY_APP" | "X_APP">;
+type UsersAPI<Str extends string> = CacheKey<`usersAPI-${Lowercase<Str>}`>;
+type MainID = UsersAPI<"birthdate" | "roles">;
 
-const mainId: MainID = "cacheId-my_app";
+const mainId: MainID = "cacheId-usersapi-roles";

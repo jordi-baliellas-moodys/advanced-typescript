@@ -17,8 +17,6 @@ function hello(): string {
   return "Hello";
 }
 
-type HelloFn = typeof hello;
-
 // Object types
 const obj: { d: number; g?: string } = { d: 0 };
 

@@ -1,10 +1,10 @@
 const failPick = (obj: object, key: string) => obj[key];
 
-const failResult = failPick({ aaa: 0 }, "ddd")();
+const failResult = failPick({ aaa: 0 }, "ddd");
 
 const pick = <T extends object>(obj: T, key: keyof T) => obj[key];
 
-const result = pick({ aaa: 0 }, "aaa");
+const result = pick({ bbb: 0 }, "bbb");
 
 interface Width {
   xs: number | string;
@@ -28,6 +28,13 @@ type RequireAtLeastOne<T extends object> = {
   [K in keyof T]-?: Required<Pick<T, K>> &
     Partial<Pick<T, Exclude<keyof T, K>>>;
 }[keyof T];
+
+// type WidthNumber = {
+//   xs: Required<Pick<Width, "xs">> &
+//     Partial<Pick<Width, Exclude<keyof Width, "xs">>>;
+//   sm: Required<Pick<Width, "sm">> &
+//     Partial<Pick<Width, Exclude<keyof Width, "sm">>>;
+// };
 
 type CorrectWidths = RequireAtLeastOne<Width> | string | number;
 

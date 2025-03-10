@@ -51,7 +51,7 @@ function animalIsFish(animal: Fish | Bird) {
 const animals: Animal[] = [{ swim: () => {} }];
 // const fishes = animals.filter(animalIsFish).map(fish => fish.swim());
 
-function isFish(pet: Fish | Bird): pet is Fish {
+function isFish(pet: Animal): pet is Fish {
   return (pet as Fish).swim !== undefined;
 }
 
