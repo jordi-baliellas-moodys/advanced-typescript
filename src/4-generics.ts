@@ -42,6 +42,23 @@ const correctWidth: CorrectWidths = { xs: 12, md: 2 };
 
 // Infer with generics
 
+const cacheMap = new Map<"hello" | "bye" | "ls", string>();
+
+const ddd = Object.fromEntries(cacheMap.entries());
+
+type CustomCache = typeof cacheMap;
+
+type MapKeys<T extends Map<any, any>> = T extends Map<infer K, any> ? K : never;
+
+type CustomCacheKeys = MapKeys<typeof cacheMap>;
+
+// type SerializableCustomCache = CustomCache extends Map<
+//   infer K extends keyof any,
+//   infer V
+// >
+//   ? Record<K, V>
+//   : never;
+
 type Room = {
   name: string;
   size: number;
@@ -75,9 +92,19 @@ type ReturnMapToObject<T extends InputMapToObject> = T extends Map<
 type ParsedHouse = ReturnMapToObject<House>;
 
 const companyTotals = [
-  { name: "apple", total: 5, date: new Date() },
-  { name: "nvidia", total: 2, date: new Date() },
+  { name: "apple", total: 5, date: new Date(), subTotal: 0 },
+  { name: "nvidia", total: 2, date: new Date(), subTotal: 0 },
 ];
+
+type Company = (typeof companyTotals)[number];
+type CompanyNumber = {
+  total: number;
+  subTotal: number;
+};
+
+const fakePickAndSum = (arr: any[], key: string) =>
+  arr.reduce((a, b) => a + (b[key] as number), 0);
+fakePickAndSum(companyTotals, "name");
 
 export const pickAndSum = <
   T extends object,
