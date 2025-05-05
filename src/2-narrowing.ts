@@ -44,7 +44,7 @@ function transformDate(date: string | Date) {
 
 // type predicate
 
-function animalIsFish(animal: Fish | Bird) {
+function animalIsFish(animal: Animal) {
   return (animal as Fish).swim !== undefined;
 }
 

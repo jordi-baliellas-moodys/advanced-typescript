@@ -49,7 +49,7 @@ const code2: Code = 121;
 
 // Assertion
 
-const iAmNumber = "" as any as number;
+const iAmNumber = "" as unknown as number;
 
 // Literal strings
 

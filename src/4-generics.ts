@@ -52,12 +52,14 @@ type MapKeys<T extends Map<any, any>> = T extends Map<infer K, any> ? K : never;
 
 type CustomCacheKeys = MapKeys<typeof cacheMap>;
 
-// type SerializableCustomCache = CustomCache extends Map<
-//   infer K extends keyof any,
-//   infer V
-// >
-//   ? Record<K, V>
-//   : never;
+type SerializableCustomCache = CustomCache extends Map<
+  infer K extends keyof any,
+  infer V
+>
+  ? Record<K, V>
+  : never;
+
+// Serializable map
 
 type Room = {
   name: string;
